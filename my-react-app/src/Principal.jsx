@@ -1,58 +1,77 @@
-import { Stack, Typography, Box } from '@mui/material'
+import { Stack, Typography, Box } from '@mui/material';
 import { useState } from 'react';
+import Jogada from './importantes/jogada';
 
 export default function Principal() {
     const [score, setScore] = useState(0);
+    
     return (
         <Stack
             alignItems="center"
             justifyContent="start"
-            pt={10}
+            pt={{ xs: 4, md: 10 }}
+            px={2}
             minHeight="100vh"
             width="100%"
             sx={{
-                background: `radial-gradient(ellipse at top, hsl(214, 47%, 23%), hsl(237, 48%, 15%))`,
+                background: `radial-gradient(circle at top, hsl(214, 47%, 23%), hsl(237, 48%, 15%))`,
             }}
         >
             <Stack
-                spacing={90}
                 direction="row"
+                justifyContent="space-between"
+                alignItems="center"
                 sx={{
-                    p: '20px',
-                    border: '3px hsl(246, 11%, 37%) solid',
-                    borderRadius: '20px',
+                    p: '18px 24px',
+                    border: '3px solid hsl(217, 16%, 45%)',
+                    borderRadius: '15px',
+                    width: '100%',
+                    maxWidth: '700px',
                 }}
             >
-                <Stack
-                    direction="column"
-                >
-                    <Typography color='white' sx={{ fontSize: 40 }}>ROCK</Typography>
-                    <Typography color='white' sx={{ fontSize: 40 }}>PAPER</Typography>
-                    <Typography color='white' sx={{ fontSize: 40 }}>SCISSORS</Typography>
+                <Stack direction="column" sx={{ lineHeight: 0.8 }}>
+                    <Typography 
+                        color="white" 
+                        sx={{ fontSize: { xs: 24, md: 40 }, fontWeight: 700, lineHeight: 0.85 }}
+                    >
+                        ROCK<br />PAPER<br />SCISSORS
+                    </Typography>
                 </Stack>
                 <Box
-                    bgcolor="white"
                     sx={{
-                        width: 200,
-                        height: 200,
-                        borderRadius: 1,
+                        bgcolor: "white",
+                        width: { xs: 80, md: 150 }, 
+                        height: { xs: 80, md: 110 },
+                        borderRadius: '8px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                     }}
                 >
-                    <Stack
-                        justifyContent="center"
-                        alignItems="center"
-                        direction="column"
-                        sx={{ pt: 4 }}
+                    <Typography
+                        color="hsl(229, 64%, 46%)" // Cor aproximada do design original
+                        sx={{ 
+                            letterSpacing: 2, 
+                            fontSize: { xs: 10, md: 16 }, 
+                            fontWeight: 600 
+                        }}
                     >
-                        <Typography
-                            display="block" 
-                            color='cores.scoreText'
-                            sx={{ letterSpacing: 2, fontSize: 30 }}
-                        >SCORE</Typography>
-                        <Typography color='cores.darkText' sx={{fontSize: 60}}>{score}</Typography>
-                    </Stack>
+                        SCORE
+                    </Typography>
+                    <Typography 
+                        color="hsl(229, 25%, 31%)" 
+                        sx={{ 
+                            fontSize: { xs: 40, md: 60 }, 
+                            fontWeight: 700, 
+                            lineHeight: 1 
+                        }}
+                    >
+                        {score}
+                    </Typography>
                 </Box>
             </Stack>
+            <Jogada />
         </Stack>
     );
 }
