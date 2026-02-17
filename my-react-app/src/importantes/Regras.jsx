@@ -15,7 +15,17 @@ export default function Regras() {
     }
 
     return (
-        <Stack>
+        <Box
+            sx={{
+                position: 'fixed',
+                bottom: { xs: 30, md: 40 },
+                right: { xs: '50%', md: 40 },
+                transform: { xs: 'translateX(50%)', md: 'none' },
+                display: 'flex',
+                justifyContent: 'flex-end',
+                zIndex: 10,
+            }}
+        >
             <Button
                 variant='outlined'
                 onClick={handleClickOpen}
@@ -70,6 +80,6 @@ export default function Regras() {
                     </CardContent>
                 </Card>
             </Dialog>
-        </Stack>
+        </Box>
     );
 }
