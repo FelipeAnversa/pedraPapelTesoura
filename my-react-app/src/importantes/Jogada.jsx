@@ -1,8 +1,13 @@
 import { Box, Button } from '@mui/material';
 
-export default function Jogada({ nome, icon, corBorda }) {
+export default function Jogada({ nome, icon, corBorda, setEscolha, habilitado }) {
+    const handleClick = (event) => {
+        setEscolha(nome);
+    }
     return (
         <Button
+            onClick={handleClick}
+            disabled={!habilitado}
             sx={{
                 borderRadius: '50%',
                 padding: 0, 

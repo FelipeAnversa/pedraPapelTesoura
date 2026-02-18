@@ -3,11 +3,11 @@ import { useState } from 'react';
 
 import Regras from './importantes/Regras.jsx';
 import Header from './importantes/Header.jsx';
-import Escolha from './importantes/Escolha.jsx';
 import Jogo from './importantes/Jogo.jsx';
 
 export default function Principal() {
     const [score, setScore] = useState(0);
+    const [escolha, setEscolha] = useState('');
     
     return (
         <Stack
@@ -19,7 +19,7 @@ export default function Principal() {
             }}
         >
             <Header score={score} />
-            <Jogo />
+            <Jogo setEscolha={setEscolha} escolha={escolha}/>
             <Regras />
         </Stack>
     );
