@@ -1,18 +1,13 @@
 import { Card, Button, Dialog, CardContent, Typography, Stack, Box } from '@mui/material';
-import imageRules from '../../images/image-rules.svg';
 import { useState } from 'react';
 import IconButton from '@mui/material/IconButton';
+import imageRules from '../../images/image-rules.svg';
 
-export default function Regras() {
+export default function Regras({ cores }) {
     const [open, setOpen] = useState(false);
-    
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    }
+      
+    const handleClickOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     return (
         <Box
@@ -24,58 +19,68 @@ export default function Regras() {
                 display: 'flex',
                 justifyContent: 'flex-end',
                 zIndex: 10,
+                width: { xs: '100%', md: 'auto' }, 
+                pointerEvents: 'none', 
             }}
         >
             <Button
                 variant='outlined'
                 onClick={handleClickOpen}
                 sx={{
-                    padding: '0.5rem 4rem',
-                    width: '3rem',
+                    pointerEvents: 'auto', 
+                    padding: '0.5rem 2rem', 
+                    minWidth: '120px', 
                     borderRadius: '10px',
                     color: 'white',
                     border: '2px white solid',
-                    letterSpacing: 2
+                    letterSpacing: 2,
+                    fontSize: '0.9rem'
                 }}
-            > RULES
+            > 
+                RULES
             </Button>
             <Dialog
-                open={open}
+                open={!!open}
                 onClose={handleClose}
-                sx={{
-                    height: '100vh',
-                    width: '100%'
-                }}
+                fullWidth 
+                maxWidth="xs" 
             >
                 <Card>
                     <CardContent>
                         <Stack
-                            spacing={5}
-                            justifyContent="space-between"
+                            spacing={4}
                             sx={{
-                                padding: '10px 20px 10px 20px',
+                                padding: { xs: '10px', md: '20px' },
                                 background: 'white',
+                                alignItems: 'center' 
                             }}
                         >
                             <Stack
                                 justifyContent='space-between'
-                                textAlign='center'
                                 direction='row'
+                                alignItems="center"
+                                sx={{ width: '100%' }} 
                             >
-                                <Typography color='grey' sx={{ fontSize: { xs: 24, md: 40 }, fontWeight: 400 }}
-                                >RULES</Typography>
-                                <IconButton
-                                    aria-label="close"
-                                    onClick={handleClose}
-                                    sx={{
-                                        color: 'grey',
-                                    }}
+                                <Typography 
+                                    color='grey' 
+                                    sx={{ fontSize: { xs: 24, md: 32 }, fontWeight: 700 }}
                                 >
-                                
-                                    <b>X</b>
+                                    RULES
+                                </Typography>
+                                <IconButton onClick={handleClose}>
+                                    <span style={{ color: cores.darkText.main, fontWeight: 'bold' }}>X</span>
                                 </IconButton>
                             </Stack>
-                            <Box component='img' src={imageRules} alt='Imagem Regras' sx={{ height: 'auto', width: 'auto'}} />
+                            <Box 
+                                component='img' 
+                                src={imageRules} 
+                                alt='Regras' 
+                                sx={{ 
+                                    width: '100%', 
+                                    maxWidth: '300px', 
+                                    height: 'auto' 
+                                }} 
+                            />
                         </Stack>
                     </CardContent>
                 </Card>

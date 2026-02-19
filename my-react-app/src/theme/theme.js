@@ -1,37 +1,28 @@
 import { createTheme } from "@mui/material/styles";
-import Barlow from "../../Barlow_Semi_Condensed,Inter/Barlow_Semi_Condensed/BarlowSemiCondensed-Black.ttf"
+import BarlowFont from "../../Barlow_Semi_Condensed,Inter/Barlow_Semi_Condensed/BarlowSemiCondensed-Black.ttf";
 
 export const theme = createTheme({
     palette: {
         cores: {
-            gold: {
-                primeiro: "hsl(39, 89%, 49%)",
-                segundo: "hsl(28, 76%, 44%)",
-            },
-            blue: {
-                primeiro: "hsl(230, 89%, 62%)",
-                segundo: "hsl(229, 64%, 46%)",
-            },
-            red: {
-                primeiro: "hsl(349, 71%, 52%)",
-                segundo: "hsl(347, 75%, 35%)",
-            },
-            purple: {
-                primeiro: "hsl(261, 73%, 60%)",
-                segundo: "hsl(261, 51%, 44%)",
-            },
-            lightBlue: {
-                primeiro: "hsl(189, 59%, 53%)",
-                segundo: "hsl(194, 58%, 42%)",
-            },
-            darkText: "hsl(229, 25%, 31%)",
-            scoreText: "hsl(229, 64%, 46%)",
-            headerOutline: "hsl(246, 11%, 37%)",
+            gold: { main: "hsl(39, 89%, 49%)" },
+            blue: { main: "hsl(230, 89%, 62%)" },
+            red: { main: "hsl(349, 71%, 52%)" },
+            purple: { main: "hsl(261, 73%, 60%)" },
+            lightBlue: { main: "hsl(189, 59%, 53%)" },
+            darkText: { main: "hsl(229, 25%, 31%)" },
+            scoreText: { main: "hsl(229, 64%, 46%)" },
+            headerOutline: { main: "hsl(246, 11%, 37%)" },
+            fundo1: { main: "hsl(214, 47%, 23%)" },
+            fundo2: { main: "hsl(237, 48%, 15%)" }
         },
     },
     typography: {
+        fontFamily: "'Barlow', sans-serif",
+        fontWeightBold: 900,
         allVariants: {
-            fontFamily: 'Barlow',
+            fontFamily: "'Barlow', sans-serif",
+            textTransform: 'none',
+            fontWeight: 900, 
         }
     },
     components: {
@@ -39,7 +30,20 @@ export const theme = createTheme({
             styleOverrides: `
                 @font-face {
                     font-family: 'Barlow';
-                    src: url(${Barlow}) format('truetype');
+                    font-style: normal;
+                    font-weight: 900;
+                    font-display: swap;
+                    src: url(${BarlowFont}) format('truetype');
+                }
+                * {
+                    box-sizing: border-box;
+                }
+                body {
+                    margin: 0;
+                    padding: 0;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    overflow-x: hidden; 
                 }
             `,
         },

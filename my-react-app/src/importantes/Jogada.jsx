@@ -1,12 +1,10 @@
 import { Box, Button } from '@mui/material';
 
 export default function Jogada({ nome, icon, corBorda, setEscolha, visivelEscolha, setVisivelEscolha, habilitado }) {
-    const handleClick = (event) => {
-        setEscolha(nome);
-        if (visivelEscolha === 'visible') {
-            setVisivelEscolha('hidden');
-        }
-    }
+    const handleClick = () => {
+        if (typeof setEscolha === 'function') setEscolha(nome);
+        if (visivelEscolha === 'visible' && typeof setVisivelEscolha === 'function') setVisivelEscolha('hidden');
+    };
 
     return (
         <Button
@@ -16,10 +14,14 @@ export default function Jogada({ nome, icon, corBorda, setEscolha, visivelEscolh
                 borderRadius: '50%',
                 padding: 0, 
                 minWidth: 0, 
-                width: 'fit-content', 
+                width: 'fit-content',
                 display: 'inline-flex', 
                 border: 'none',
                 alignSelf: 'center',
+                "&.Mui-disabled": {
+                    border: 'none',
+                    opacity: 1 
+                }
             }}
         >
             <Box
@@ -27,25 +29,28 @@ export default function Jogada({ nome, icon, corBorda, setEscolha, visivelEscolh
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: '225px',
-                    width: '225px',
+                    height: { xs: '130px', md: '225px' },
+                    width: { xs: '130px', md: '225px' },
                     backgroundColor: 'white',
                     borderRadius: '50%',
-                    border: `15px solid ${corBorda}`,
+                    border: { 
+                        xs: `15px solid ${corBorda || 'grey'}`, 
+                        md: `22px solid ${corBorda || 'grey'}` 
+                    },
                     boxShadow: `
                         inset 0px 6px 0px rgba(0,0,0,0.15), 
-                        inset 0px -6px 0px rgba(255,255,255,0.3),
-                        inset 0px 8px 10px rgba(0,0,0,0.2), 
+                        inset 0px -6px 0px rgba(0,0,0,0.05),
                         0px 8px 0px rgba(0,0,0,0.2)
                     `,
-                    position: 'relative'
+                    position: 'relative',
+                    transition: 'transform 0.2s ease',
+                    '&:hover': habilitado ? { transform: 'scale(1.1)' } : {}
                 }}
             >
                 <Box
                     sx={{
                         position: 'absolute',
                         inset: 0,
-                        borderRadius: '50%',
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center'
@@ -53,11 +58,11 @@ export default function Jogada({ nome, icon, corBorda, setEscolha, visivelEscolh
                 >
                     <Box 
                         component='img' 
-                        src={icon} 
-                        alt={nome} 
+                        src={icon || ''} 
+                        alt={nome || 'ícone'} 
                         sx={{ 
-                            height: '100px', 
-                            width: '100px', 
+                            height: { xs: '50px', md: '100px' }, 
+                            width: { xs: '50px', md: '100px' }, 
                             objectFit: 'contain' 
                         }}
                     />

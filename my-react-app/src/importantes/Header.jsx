@@ -1,7 +1,7 @@
 import { Stack, Typography, Box } from '@mui/material';
-import logo from '../../images/logo.svg'
+import logo from '../../images/logo.svg';
 
-export default function Header({ score }) {
+export default function Header({ score, cores }) {
     return (
         <Box
             component="header"
@@ -18,7 +18,7 @@ export default function Header({ score }) {
                 alignItems="center"
                 sx={{
                     p: { xs: '12px 18px', sm: '18px 24px' },
-                    border: '3px solid hsl(217, 16%, 45%)',
+                    border: `3px solid ${cores.headerOutline.main}`,
                     borderRadius: { xs: '8px', sm: '15px' },
                     width: '100%',
                     maxWidth: '700px',
@@ -26,10 +26,12 @@ export default function Header({ score }) {
             >
                 <Box 
                     component='img'
-                    src={logo}
-                    alt={'logo'}
+                    src={logo || ''}
+                    alt='Rock Paper Scissors Logo'
                     sx={{ 
-                        objectFit: 'contain' 
+                        objectFit: 'contain',
+                        height: { xs: '50px', sm: '80px', md: '100px' }, 
+                        width: 'auto'
                     }}
                 />
                 <Stack
@@ -45,7 +47,7 @@ export default function Header({ score }) {
                 >
                     <Typography
                         sx={{
-                            color: "hsl(229, 64%, 46%)",
+                            color: cores.scoreText.main,
                             letterSpacing: { xs: 1, sm: 2 },
                             fontSize: { xs: 10, sm: 13, md: 16 },
                             fontWeight: 600,
@@ -55,13 +57,13 @@ export default function Header({ score }) {
                     </Typography>
                     <Typography
                         sx={{
-                            color: "hsl(229, 25%, 31%)",
+                            color: cores.darkText.main,
                             fontSize: { xs: 40, sm: 50, md: 60 },
                             fontWeight: 700,
                             lineHeight: 1,
                         }}
                     >
-                        {score}
+                        {score ?? 0}
                     </Typography>
                 </Stack>
             </Stack>

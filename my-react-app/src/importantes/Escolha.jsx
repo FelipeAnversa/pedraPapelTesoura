@@ -6,52 +6,67 @@ import iconRock from '../../images/icon-rock.svg';
 import iconScissors from '../../images/icon-scissors.svg'
 import triangulo from '../../images/bg-triangle.svg'
 
-export default function Escolha({ setEscolha, visivelEscolha, setVisivelEscolha }) {
+export default function Escolha({ setEscolha, visivelEscolha, setVisivelEscolha, cores }) {
+    const containerSize = { xs: '300px', sm: '400px', md: '500px' };
+
     return (
         <Stack
-            visibility={visivelEscolha}
-            justifyContent='center'
-            alignItems='center'
-            mt={10}
             sx={{
+                display: visivelEscolha === 'visible' ? 'flex' : 'none',
+                justifyContent: 'center',
+                alignItems: 'center',
+                mt: { xs: 20, md: 0 },
                 position: 'relative',
                 backgroundImage: `url("${triangulo}")`,
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
-                backgroundSize: '70%', 
+                backgroundSize: { xs: '70%', md: '75%' }, 
                 width: '100%',
-                maxWidth: '550px',
-                height: '500px',
+                maxWidth: containerSize,
+                height: containerSize, 
                 margin: '0 auto',
             }}
         >
-            <Box sx={{ position: 'absolute', top: 0, left: 0 }}>
+            <Box sx={{ 
+                position: 'absolute', 
+                top: { xs: '-20px', md: '0' }, 
+                left: { xs: '-20px', md: '0' } 
+            }}>
                 <Jogada 
                     nome={'papel'} 
                     icon={iconPaper} 
-                    corBorda={'hsl(230, 89%, 62%)'} 
+                    corBorda={cores.blue.main} 
                     setEscolha={setEscolha} 
                     visivelEscolha={visivelEscolha}
                     setVisivelEscolha={setVisivelEscolha}
                     habilitado={1}
                 />
             </Box>
-            <Box sx={{ position: 'absolute', top: 0, right: 0 }}>
+            <Box sx={{ 
+                position: 'absolute', 
+                top: { xs: '-20px', md: '0' }, 
+                right: { xs: '-20px', md: '0' } 
+            }}>
                 <Jogada 
                     nome={'tesoura'} 
                     icon={iconScissors} 
-                    corBorda={'hsl(39, 89%, 49%)'} 
+                    corBorda={cores.gold.main} 
                     setEscolha={setEscolha} 
                     visivelEscolha={visivelEscolha}
                     setVisivelEscolha={setVisivelEscolha}
                     habilitado={1}
                 />
             </Box>
-            <Box sx={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)' }}>
+            <Box sx={{ 
+                position: 'absolute', 
+                bottom: { xs: '20px', md: '40px' }, 
+                left: '50%', 
+                transform: 'translateX(-50%)' 
+            }}>
                 <Jogada 
                     nome={'pedra'} 
                     icon={iconRock} 
-                    corBorda={'hsl(349, 71%, 52%)'} 
+                    corBorda={cores.red.main} 
                     setEscolha={setEscolha} 
                     visivelEscolha={visivelEscolha}
                     setVisivelEscolha={setVisivelEscolha}
