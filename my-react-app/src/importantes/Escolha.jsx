@@ -6,12 +6,13 @@ import iconRock from '../../images/icon-rock.svg';
 import iconScissors from '../../images/icon-scissors.svg'
 import triangulo from '../../images/bg-triangle.svg'
 
-export default function Escolha({ setEscolha, visibilidade }) {
+export default function Escolha({ setEscolha, visivelEscolha, setVisivelEscolha }) {
     return (
         <Stack
-            visibility={visibilidade}
+            visibility={visivelEscolha}
             justifyContent='center'
             alignItems='center'
+            mt={10}
             sx={{
                 position: 'relative',
                 backgroundImage: `url("${triangulo}")`,
@@ -19,8 +20,8 @@ export default function Escolha({ setEscolha, visibilidade }) {
                 backgroundPosition: 'center',
                 backgroundSize: '70%', 
                 width: '100%',
-                maxWidth: '450px',
-                height: '400px',
+                maxWidth: '550px',
+                height: '500px',
                 margin: '0 auto',
             }}
         >
@@ -30,6 +31,8 @@ export default function Escolha({ setEscolha, visibilidade }) {
                     icon={iconPaper} 
                     corBorda={'hsl(230, 89%, 62%)'} 
                     setEscolha={setEscolha} 
+                    visivelEscolha={visivelEscolha}
+                    setVisivelEscolha={setVisivelEscolha}
                     habilitado={1}
                 />
             </Box>
@@ -39,6 +42,8 @@ export default function Escolha({ setEscolha, visibilidade }) {
                     icon={iconScissors} 
                     corBorda={'hsl(39, 89%, 49%)'} 
                     setEscolha={setEscolha} 
+                    visivelEscolha={visivelEscolha}
+                    setVisivelEscolha={setVisivelEscolha}
                     habilitado={1}
                 />
             </Box>
@@ -48,6 +53,8 @@ export default function Escolha({ setEscolha, visibilidade }) {
                     icon={iconRock} 
                     corBorda={'hsl(349, 71%, 52%)'} 
                     setEscolha={setEscolha} 
+                    visivelEscolha={visivelEscolha}
+                    setVisivelEscolha={setVisivelEscolha}
                     habilitado={1}
                 />
             </Box>

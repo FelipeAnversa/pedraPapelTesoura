@@ -4,10 +4,12 @@ import { useState } from 'react';
 import Regras from './importantes/Regras.jsx';
 import Header from './importantes/Header.jsx';
 import Jogo from './importantes/Jogo.jsx';
+import Escolha from './importantes/Escolha.jsx';
 
 export default function Principal() {
     const [score, setScore] = useState(0);
     const [escolha, setEscolha] = useState('');
+    const [visivelEscolha, setVisivelEscolha] = useState('visible');
     
     return (
         <Stack
@@ -18,8 +20,23 @@ export default function Principal() {
                 background: `radial-gradient(circle at top, hsl(214, 47%, 23%), hsl(237, 48%, 15%))`,
             }}
         >
-            <Header score={score} />
-            <Jogo setEscolha={setEscolha} escolha={escolha}/>
+            <Header 
+                score={score} 
+            />
+            {visivelEscolha == 'visible' ? (
+                <Escolha 
+                    setEscolha={setEscolha} 
+                    visivelEscolha={visivelEscolha} 
+                    setVisivelEscolha={setVisivelEscolha}
+                />
+            ) : (
+                <Jogo 
+                    escolha={escolha} 
+                    setVisivelEscolha={setVisivelEscolha} 
+                    setScore={setScore} 
+                    score={score} 
+                />
+            )}
             <Regras />
         </Stack>
     );

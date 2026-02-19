@@ -1,4 +1,5 @@
 import { Stack, Typography, Box } from '@mui/material';
+import logo from '../../images/logo.svg'
 
 export default function Header({ score }) {
     return (
@@ -23,18 +24,14 @@ export default function Header({ score }) {
                     maxWidth: '700px',
                 }}
             >
-                <Typography
-                    component="h1"
-                    color="white"
-                    sx={{
-                        fontSize: { xs: 21, sm: 32, md: 40 },
-                        fontWeight: 700,
-                        lineHeight: 0.85,
-                        textTransform: 'uppercase',
+                <Box 
+                    component='img'
+                    src={logo}
+                    alt={'logo'}
+                    sx={{ 
+                        objectFit: 'contain' 
                     }}
-                >
-                    ROCK<br />PAPER<br />SCISSORS
-                </Typography>
+                />
                 <Stack
                     sx={{
                         bgcolor: "white",

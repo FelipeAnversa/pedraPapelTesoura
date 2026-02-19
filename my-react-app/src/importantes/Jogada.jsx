@@ -1,9 +1,13 @@
 import { Box, Button } from '@mui/material';
 
-export default function Jogada({ nome, icon, corBorda, setEscolha, habilitado }) {
+export default function Jogada({ nome, icon, corBorda, setEscolha, visivelEscolha, setVisivelEscolha, habilitado }) {
     const handleClick = (event) => {
         setEscolha(nome);
+        if (visivelEscolha === 'visible') {
+            setVisivelEscolha('hidden');
+        }
     }
+
     return (
         <Button
             onClick={handleClick}
@@ -23,8 +27,8 @@ export default function Jogada({ nome, icon, corBorda, setEscolha, habilitado })
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: '175px',
-                    width: '175px',
+                    height: '225px',
+                    width: '225px',
                     backgroundColor: 'white',
                     borderRadius: '50%',
                     border: `15px solid ${corBorda}`,
@@ -51,7 +55,11 @@ export default function Jogada({ nome, icon, corBorda, setEscolha, habilitado })
                         component='img' 
                         src={icon} 
                         alt={nome} 
-                        sx={{ height: '70px', width: '70px', objectFit: 'contain' }}
+                        sx={{ 
+                            height: '100px', 
+                            width: '100px', 
+                            objectFit: 'contain' 
+                        }}
                     />
                 </Box>
             </Box>
