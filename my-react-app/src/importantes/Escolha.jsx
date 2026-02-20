@@ -4,75 +4,118 @@ import Jogada from './Jogada.jsx';
 import iconPaper from '../../images/icon-paper.svg';
 import iconRock from '../../images/icon-rock.svg';
 import iconScissors from '../../images/icon-scissors.svg'
-import triangulo from '../../images/bg-triangle.svg'
+import iconLizard from '../../images/icon-lizard.svg'
+import iconSpock from '../../images/icon-spock.svg'
+
+import pentagono from '../../images/bg-pentagon.svg'
 
 export default function Escolha({ setEscolha, visivelEscolha, setVisivelEscolha, cores }) {
-    const containerSize = { xs: '300px', sm: '400px', md: '500px' };
+    const containerSize = { xs: '270px', sm: '400px', md: '450px' };
 
     return (
-        <Stack
+        <Box
             sx={{
-                display: visivelEscolha === 'visible' ? 'flex' : 'none',
-                justifyContent: 'center',
-                alignItems: 'center',
-                mt: { xs: 20, md: 0 },
+                display: visivelEscolha === 'visible' ? 'block' : 'none',
                 position: 'relative',
-                backgroundImage: `url("${triangulo}")`,
+                width: containerSize,
+                height: containerSize,
+                margin: '100px auto 0', 
+                backgroundImage: `url("${pentagono}")`,
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
-                backgroundSize: { xs: '70%', md: '75%' }, 
-                width: '100%',
-                maxWidth: containerSize,
-                height: containerSize, 
-                margin: '0 auto',
+                backgroundSize: 'contain'
             }}
         >
-            <Box sx={{ 
-                position: 'absolute', 
-                top: { xs: '-20px', md: '0' }, 
-                left: { xs: '-20px', md: '0' } 
-            }}>
+            <Box 
+                sx={{ 
+                    position: 'absolute', 
+                    top: '0%', 
+                    left: '50%', 
+                    transform: 'translate(-50%, -50%)' 
+                }}
+            >
                 <Jogada 
-                    nome={'papel'} 
-                    icon={iconPaper} 
-                    corBorda={cores.blue.main} 
-                    setEscolha={setEscolha} 
-                    visivelEscolha={visivelEscolha}
-                    setVisivelEscolha={setVisivelEscolha}
-                    habilitado={1}
-                />
-            </Box>
-            <Box sx={{ 
-                position: 'absolute', 
-                top: { xs: '-20px', md: '0' }, 
-                right: { xs: '-20px', md: '0' } 
-            }}>
-                <Jogada 
-                    nome={'tesoura'} 
+                    nome='tesoura' 
                     icon={iconScissors} 
                     corBorda={cores.gold.main} 
-                    setEscolha={setEscolha} 
+                    setEscolha={setEscolha}
                     visivelEscolha={visivelEscolha}
                     setVisivelEscolha={setVisivelEscolha}
-                    habilitado={1}
+                    habilitado={1} 
                 />
             </Box>
-            <Box sx={{ 
-                position: 'absolute', 
-                bottom: { xs: '20px', md: '40px' }, 
-                left: '50%', 
-                transform: 'translateX(-50%)' 
-            }}>
+            <Box 
+                sx={{ 
+                    position: 'absolute', 
+                    top: '35%', 
+                    left: '0%', 
+                    transform: 'translate(-30%, -50%)' 
+                }}
+            >
                 <Jogada 
-                    nome={'pedra'} 
+                    nome='spock' 
+                    icon={iconSpock} 
+                    corBorda={cores.lightBlue.main} 
+                    setEscolha={setEscolha}
+                    visivelEscolha={visivelEscolha}
+                    setVisivelEscolha={setVisivelEscolha}
+                    habilitado={1} 
+                />
+            </Box>
+            <Box 
+                sx={{ 
+                    position: 'absolute', 
+                    top: '35%', 
+                    right: '0%', 
+                    transform: 'translate(30%, -50%)' 
+                }}
+            >
+                <Jogada 
+                    nome='papel' 
+                    icon={iconPaper} 
+                    corBorda={cores.blue.main} 
+                    setEscolha={setEscolha}
+                    visivelEscolha={visivelEscolha}
+                    setVisivelEscolha={setVisivelEscolha}
+                    habilitado={1} 
+                />
+            </Box>
+            <Box 
+                sx={{ 
+                    position: 'absolute', 
+                    bottom: '0%', 
+                    left: '15%', 
+                    transform: 'translate(-50%, 20%)' 
+                }}
+            >
+                <Jogada 
+                    nome='lagarto' 
+                    icon={iconLizard} 
+                    corBorda={cores.purple.main} 
+                    setEscolha={setEscolha}
+                    visivelEscolha={visivelEscolha}
+                    setVisivelEscolha={setVisivelEscolha}
+                    habilitado={1} 
+                />
+            </Box>
+            <Box 
+                sx={{ 
+                    position: 'absolute', 
+                    bottom: '0%', 
+                    right: '15%', 
+                    transform: 'translate(50%, 20%)' 
+                }}
+            >
+                <Jogada 
+                    nome='pedra' 
                     icon={iconRock} 
                     corBorda={cores.red.main} 
-                    setEscolha={setEscolha} 
+                    setEscolha={setEscolha}
                     visivelEscolha={visivelEscolha}
                     setVisivelEscolha={setVisivelEscolha}
-                    habilitado={1}
+                    habilitado={1} 
                 />
             </Box>
-        </Stack>
+        </Box>
     );
 }

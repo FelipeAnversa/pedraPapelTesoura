@@ -1,7 +1,7 @@
 import { Card, Button, Dialog, CardContent, Typography, Stack, Box } from '@mui/material';
 import { useState } from 'react';
 import IconButton from '@mui/material/IconButton';
-import imageRules from '../../images/image-rules.svg';
+import imageRules from '../../images/image-rules-bonus.svg';
 
 export default function Regras({ cores }) {
     const [open, setOpen] = useState(false);
@@ -14,7 +14,7 @@ export default function Regras({ cores }) {
             sx={{
                 position: 'fixed',
                 bottom: { xs: 30, md: 40 },
-                right: { xs: '50%', md: 40 },
+                right: { xs: '84%', md: 40 },
                 transform: { xs: 'translateX(50%)', md: 'none' },
                 display: 'flex',
                 justifyContent: 'flex-end',

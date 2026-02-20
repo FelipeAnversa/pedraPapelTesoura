@@ -1,29 +1,39 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
+import { useEffect, useState, useMemo } from "react";
 import Jogada from "./Jogada";
+
 import iconPaper from '../../images/icon-paper.svg';
 import iconRock from '../../images/icon-rock.svg';
 import iconScissors from '../../images/icon-scissors.svg';
-import { useEffect, useState, useMemo } from "react";
+import iconLizard from '../../images/icon-lizard.svg';
+import iconSpock from '../../images/icon-spock.svg';
 
 export default function Jogo({ escolha, setVisivelEscolha, setScore, cores }) {
     const icons = useMemo(() => ({ 
         papel: iconPaper, 
         pedra: iconRock, 
-        tesoura: iconScissors 
+        tesoura: iconScissors,
+        lagarto: iconLizard,
+        spock: iconSpock
     }), []);
 
     const cor = useMemo(() => ({
         papel: cores.blue.main,
         pedra: cores.red.main,
-        tesoura: cores.gold.main
+        tesoura: cores.gold.main,
+        lagarto: cores.purple.main,
+        spock: cores.lightBlue.main
     }), []);
 
     const [selecionado, setSelecionado] = useState('');
     const [resultado, setResultado] = useState('');
 
+    const [ganhouCasa, setGanhouCasa] = useState(0);
+    const [ganhouFora, setGanhouFora] = useState(0);
+
     useEffect(() => {
         if (escolha && !selecionado) {
-            const nomes = ['papel', 'pedra', 'tesoura'];
+            const nomes = ['papel', 'pedra', 'tesoura', 'lagarto', 'spock'];
             const timer = setTimeout(() => {
                 const indiceAleatorio = Math.floor(Math.random() * nomes.length);
                 setSelecionado(nomes[indiceAleatorio]);
@@ -39,25 +49,38 @@ export default function Jogo({ escolha, setVisivelEscolha, setScore, cores }) {
             } else if (
                 (escolha === 'papel' && selecionado === 'pedra') ||
                 (escolha === 'pedra' && selecionado === 'tesoura') ||
-                (escolha === 'tesoura' && selecionado === 'papel')
+                (escolha === 'tesoura' && selecionado === 'papel') ||
+                (escolha === 'pedra' && selecionado === 'lagarto') ||
+                (escolha === 'lagarto' && selecionado === 'spock') ||
+                (escolha === 'spock' && selecionado === 'tesoura') ||
+                (escolha === 'tesoura' && selecionado === 'lagarto') ||
+                (escolha === 'papel' && selecionado === 'spock') ||
+                (escolha === 'lagarto' && selecionado === 'papel') ||
+                (escolha === 'spock' && selecionado === 'pedra')
             ) {
                 setResultado('YOU WIN');
-                setScore((prev) => prev + 1); 
+                setScore((prev) => prev + 1);
+                setGanhouCasa(1); 
             } else {
                 setResultado('YOU LOSE');
-                setScore((prev) => prev - 1); 
+                setScore((prev) => prev - 1);
+                setGanhouFora(1); 
             }
         }
     }, [escolha, selecionado, resultado, setScore]);
 
-    const reiniciar = () => setVisivelEscolha('visible');
-
+    const reiniciar = () => {
+        setVisivelEscolha('visible');
+        setGanhouCasa(0);
+        setGanhouFora(0);
+    }
+    
 return (
         <Stack 
             direction="column" 
             alignItems='center' 
             justifyContent='center'
-            mt={{ xs: 4, md: 10 }}
+            mt={{ xs: 15, md: 10 }}
             sx={{ width: '100%', maxWidth: '1000px', margin: '0 auto' }}
         >
             <Stack 
@@ -77,6 +100,7 @@ return (
                         icon={icons[escolha] || ''} 
                         corBorda={cor[escolha] || 'white'} 
                         habilitado={0} 
+                        ganhou={ganhouCasa}
                     />
                 </Stack>
                 {resultado && (
@@ -115,8 +139,8 @@ return (
                     >THE HOUSE PICKED</Typography>
                     <Box sx={{
                         borderRadius: '50%',
-                        width: { xs: '130px', md: '225px' }, 
-                        height: { xs: '130px', md: '225px' },
+                        width: { xs: '110px', md: '200px' }, 
+                        height: { xs: '110px', md: '200px' },
                         background: 'rgba(0,0,0,0.2)',
                         display: 'flex',
                         alignItems: 'center',
@@ -127,7 +151,8 @@ return (
                                 nome={selecionado} 
                                 icon={icons[selecionado]} 
                                 corBorda={cor[selecionado]} 
-                                habilitado={0} 
+                                habilitado={0}
+                                ganhou={ganhouFora} 
                             />
                         ) : (
                             <Box sx={{ 
