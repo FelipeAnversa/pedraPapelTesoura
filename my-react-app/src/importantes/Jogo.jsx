@@ -31,6 +31,14 @@ export default function Jogo({ escolha, setVisivelEscolha, setScore, cores }) {
     const [ganhouCasa, setGanhouCasa] = useState(0);
     const [ganhouFora, setGanhouFora] = useState(0);
 
+    const regras = {
+        pedra: ['tesoura', 'lagarto'],
+        papel: ['pedra', 'spock'],
+        tesoura: ['papel', 'lagarto'],
+        lagarto: ['spock', 'papel'],
+        spock: ['tesoura', 'pedra']
+    };
+
     useEffect(() => {
         if (escolha && !selecionado) {
             const nomes = ['papel', 'pedra', 'tesoura', 'lagarto', 'spock'];
@@ -44,33 +52,26 @@ export default function Jogo({ escolha, setVisivelEscolha, setScore, cores }) {
 
     useEffect(() => {
         if (escolha && selecionado && !resultado) {
+            setGanhouCasa(0);
+            setGanhouFora(0);
             if (escolha === selecionado) {
                 setResultado('DRAW');
-            } else if (
-                (escolha === 'papel' && selecionado === 'pedra') ||
-                (escolha === 'pedra' && selecionado === 'tesoura') ||
-                (escolha === 'tesoura' && selecionado === 'papel') ||
-                (escolha === 'pedra' && selecionado === 'lagarto') ||
-                (escolha === 'lagarto' && selecionado === 'spock') ||
-                (escolha === 'spock' && selecionado === 'tesoura') ||
-                (escolha === 'tesoura' && selecionado === 'lagarto') ||
-                (escolha === 'papel' && selecionado === 'spock') ||
-                (escolha === 'lagarto' && selecionado === 'papel') ||
-                (escolha === 'spock' && selecionado === 'pedra')
-            ) {
+            } else if (regras[escolha].includes(selecionado)) {
                 setResultado('YOU WIN');
-                setScore((prev) => prev + 1);
-                setGanhouCasa(1); 
+                setScore(prev => prev + 1);
+                setGanhouCasa(1);
             } else {
                 setResultado('YOU LOSE');
-                setScore((prev) => prev - 1);
-                setGanhouFora(1); 
+                setScore(prev => prev - 1);
+                setGanhouFora(1);
             }
         }
     }, [escolha, selecionado, resultado, setScore]);
 
     const reiniciar = () => {
         setVisivelEscolha('visible');
+        setSelecionado(''); 
+        setResultado('');
         setGanhouCasa(0);
         setGanhouFora(0);
     }

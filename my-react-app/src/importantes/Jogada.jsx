@@ -2,33 +2,40 @@ import { Box, Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 export default function Jogada({ nome, icon, corBorda, setEscolha, visivelEscolha, setVisivelEscolha, habilitado, ganhou }) {
-    const [showWaves, setShowWaves] = useState(false);
-
     const handleClick = () => {
         if (typeof setEscolha === 'function') setEscolha(nome);
         if (visivelEscolha === 'visible' && typeof setVisivelEscolha === 'function') setVisivelEscolha('hidden');
     };
 
+    const [camadaUm, setCamadaUm] = useState('hidden');
+    const [camadaDois, setCamadaDois] = useState('hidden');
+    const [camadaTres, setCamadaTres] = useState('hidden');
+
     useEffect(() => {
         if (ganhou === 1) {
-            const timer = setTimeout(() => setShowWaves(true), 300);
-            return () => clearTimeout(timer);
-        } else {
-            setShowWaves(false);
+            setTimeout(() => {
+                setCamadaUm('visible');
+            }, 100);
+            setTimeout(() => {
+                setCamadaDois('visible');
+            }, 200);
+            setTimeout(() => {
+                setCamadaTres('visible');
+            }, 300);
         }
     }, [ganhou]);
 
-    const waveStyle = (size, opacity, delay) => ({
+    const waveStyle = (size, opacity, visibility) => ({
         position: 'absolute',
         borderRadius: '50%',
-        backgroundColor: `rgba(255, 255, 255, ${opacity})`,
         width: size,
         height: size,
-        zIndex: -1, 
-        transition: 'all 0.5s ease-out',
-        transform: showWaves ? 'scale(1)' : 'scale(0)',
-        opacity: showWaves ? 1 : 0,
-        transitionDelay: delay
+        backgroundColor: 'rgba(255, 255, 255, 0.05)', 
+        zIndex: 0, 
+        visibility: visibility,
+        transition: 'all 0.4s ease-in-out',
+        transform: visibility === 'visible' ? 'scale(1)' : 'scale(0.8)',
+        opacity: visibility === 'visible' ? opacity : 0,
     });
 
     return (
@@ -40,10 +47,15 @@ export default function Jogada({ nome, icon, corBorda, setEscolha, visivelEscolh
             width: { xs: '150px', md: '280px' }, 
             height: { xs: '150px', md: '280px' }
         }}>
-            <Box sx={waveStyle('140%', 0.2, '300ms')} />
-            <Box sx={waveStyle('125%', 0.4, '200ms')} />
-            <Box sx={waveStyle('110%', 0.6, '100ms')} />
-
+            <Box 
+                sx={waveStyle('140%', 0.2, camadaTres)} 
+            />
+            <Box 
+                sx={waveStyle('115%', 0.4, camadaDois)}
+            />
+            <Box 
+                sx={waveStyle('95%', 0.6, camadaUm)}
+            />
             <Button
                 onClick={handleClick}
                 disabled={!habilitado}
